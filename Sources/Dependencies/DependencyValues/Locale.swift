@@ -29,28 +29,11 @@ extension DependencyValues {
   /// // Make assertions with model...
   /// ```
   public var locale: Locale {
-    get {
-      #if canImport(Darwin)
-        self[LocaleKey.self]
-      #else
-        self[LocaleKey.self].wrappedValue
-      #endif
-    }
-    set {
-      #if canImport(Darwin)
-        self[LocaleKey.self] = newValue
-      #else
-        self[LocaleKey.self].wrappedValue = newValue
-      #endif
-    }
+    get { self[LocaleKey.self] }
+    set { self[LocaleKey.self] = newValue }
   }
 
   private enum LocaleKey: DependencyKey {
-    #if canImport(Darwin)
-      static let liveValue = Locale.autoupdatingCurrent
-    #else
-      // NB: 'Locale' sendability is not yet available in a 'swift-corelibs-foundation' release
-      static let liveValue = UncheckedSendable(Locale.autoupdatingCurrent)
-    #endif
+    static let liveValue = Locale.autoupdatingCurrent
   }
 }

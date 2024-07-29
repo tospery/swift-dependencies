@@ -112,7 +112,7 @@ extension DependencyValues {
   }
 
   @available(*, deprecated, message: "Use 'withDependencies' instead.")
-  public static func withValue<Value, R: Sendable>(
+  public static func withValue<Value, R>(
     _ keyPath: WritableKeyPath<DependencyValues, Value>,
     _ value: @autoclosure () -> Value,
     operation: () async throws -> R
@@ -133,7 +133,7 @@ extension DependencyValues {
   }
 
   @available(*, deprecated, message: "Use 'withDependencies' instead.")
-  public static func withValues<R: Sendable>(
+  public static func withValues<R>(
     _ updateValuesForOperation: (inout Self) throws -> Void,
     operation: () async throws -> R
   ) async rethrows -> R {
@@ -149,7 +149,7 @@ extension DependencyValues {
   }
 
   @available(*, deprecated, message: "Use 'withDependencies' instead.")
-  public static func withTestValues<R: Sendable>(
+  public static func withTestValues<R>(
     _ updateValuesForOperation: (inout Self) async throws -> Void,
     assert operation: () async throws -> R
   ) async rethrows -> R {
